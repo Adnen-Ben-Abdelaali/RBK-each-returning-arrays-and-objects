@@ -192,3 +192,63 @@ function isPrime(object) {
   });
   return outputArray;
 }
+/******************************************************************/
+/*
+4.Write a function called objectToArrayOrArrayToObject that takes an array
+ or an object and transforms any array or object within the array or object
+  into an object or array.
+
+ objectToArrayOrArrayToObject(coll){
+       ...
+ }
+ var ex = {ages: [23, 44, {min: 1, max: 2}], people: {height: 'tall', eye_color: 'brown'}};
+ objectToArrayOrArrayToObject(ex);
+ // {ages: {0: 23, 1: 44, 2: [1, 2]} people: ['tall', 'brown']}
+*/
+/*
+function arrToObjOrObjToArr(variable){
+  each(variable,function(value,index){
+    if(typeof value === 'object'){
+      if(Array.isArray(value)){
+        variable[index] = arrayToObject(value);
+      }else{
+        variable[index] = objectToArray(value);
+     }
+    }else{
+      variable[index]=value;
+    }
+  })
+  return variable;
+}
+
+function objectToArray(obj){
+  var array=[];
+  each(obj,function(value){
+    if(typeof value === 'object'){
+      if(Array.isArray(value)){
+        array.push(arrayToObject(value));
+      }else{
+        array.push(objectToArray(value));
+      }
+    }else{
+      array.push(value);
+    }
+  })
+  return array;
+}
+
+function arrayToObject(array){
+  var obj={};
+  each(array,function(value,index){
+    if (typeof value === 'object'){
+      if(Array.isArray(value)){
+        obj[index]=arrayToObject(value);
+      }else{
+        obj[index]=objectToArray(value);
+      }
+    }else{
+      obj[index]=value;
+    }
+  })
+  return obj;
+}
