@@ -99,4 +99,96 @@ of the object ( you need to arrange the new array, odd numbers
  }
  oddEvenArray({a:3,b:5 ,c: 4 ,d: 1, e:10, f:12 ,g:56 ,h:44 ,i:32});
   // ==> [3,5,1,4,10,12,56,44,32]
+  Extra challenge:
+
+ return the odd numbers ordered Ascending and the even numbers descending
+
+ oddEvenArray({a:3,b:5 ,c: 4 ,d: 1, e:10, f:12 ,g:56 ,h:44 ,i:32});
+  // ==> [1,3,5,56,44,32,12,10,4]
 */
+function oddEvenArray(object) {
+  let outputArray = new Array();
+  let permute = true;
+  let firstEvenIndex = 0;
+  each(object, function(element, index) {
+    outputArray.push(element);
+  });
+/* sorting the array to divide seperate the odd and the even elements */
+  while(permute === true) {
+    permute = false;
+    let exchange = 0;
+    for(let i = 0; i < outputArray.length - 1; i++) {
+      if( (outputArray[i] % 2 === 0) && (outputArray[i + 1] % 2 !== 0) ) {
+          exchange = outputArray[i];
+          outputArray[i] = outputArray[i + 1];
+          outputArray[i + 1] = exchange;
+          permute = true;
+      }
+    }
+  }
+  console.log("outputArray = " + outputArray);
+  /* Identifying the index of the first even element in the outputArray */
+  for(let i = 0; i < outputArray.length; i++) {
+      if(outputArray[i] % 2 === 0) {
+          firstEvenIndex = i;
+          console.log('first even element : ' + outputArray[i]);
+        break;
+      }
+  }
+  /* sorting the odd numbers ascendingly */
+  permute = true;
+  while(permute  === true) {
+    permute = false;
+    let exchange = 0;
+    for(let i = 0; i < firstEvenIndex - 1; i++) {
+        if(outputArray[i] > outputArray[i + 1]) {
+            exchange = outputArray[i];
+            outputArray[i] = outputArray[i + 1];
+            outputArray[i + 1] = exchange;
+            permute = true;
+        }
+    }
+  }
+  console.log("outputArray = " + outputArray);
+  /* sorting the even numbers descendingly */
+  permute = true;
+  while(permute === true) {
+    permute = false;
+    let exchange = 0;
+    for(let i = firstEvenIndex; i < outputArray.length - 1; i++) {
+      if(outputArray[i] < outputArray[i + 1]) {
+          exchange = outputArray[i];
+          outputArray[i] = outputArray[i + 1];
+          outputArray[i + 1] = exchange;
+          permute = true;
+      }
+    }
+  }
+  return outputArray;
+}
+/*************************************************************************/
+/*
+6.Write a function called isPrimeArray that accepts an object as parameter
+ and return array of prime numbers in the object
+
+ function isPrime(object){
+       //your code is here
+}
+ isPrime({a:3,b:5 ,c: 4 ,d: 1, e:10, f:12 ,g:56 ,h:44 ,i:32}); // ==> [3,5,1]
+*/
+function isPrime(object) {
+  let outputArray = new Array();
+  each(object, function(element, index) {
+    let elementPrime = true;
+    for(let i = 2; i < element - 1; i++) {
+        if(element % i === 0) {
+            elementPrime = false;
+            break;
+        }
+    }
+    if(elementPrime === true) {
+        outputArray.push(element);
+    }
+  });
+  return outputArray;
+}
